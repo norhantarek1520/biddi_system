@@ -1,4 +1,4 @@
-# Biddie system 
+# Biddi system 
 
 # Introduction
 Biddie System is a platform designed to facilitate online bidding and auctions for various products and services. 
