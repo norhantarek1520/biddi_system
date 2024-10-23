@@ -120,3 +120,45 @@ It focuses on the essential CRUD (Create, Read, Update, Delete) operations witho
 |locations| (array of objects)| Vendor locations (alias, details, city, postalCode)|
 
 
+# REST Endpoints:
+## Category Management :
+   -  GET /category   : Retrieves a list of all category.
+   -  GET /category/{id}   : Retrieves a specific category by its ID.
+   -  POST /category : Creates a new category.
+   -  PUT /category/{id} : Updates an existing category by its ID.
+   -  DELETE /category/{id} : Deletes an existing category by its ID.
+
+## Subcategory Management :
+   -  GET /sub_category   : Retrieves a list of all Subcategory.
+   -  GET /sub_category/{id}   : Retrieves a specific Subcategory by its ID.
+   -  POST /sub_category : Creates a new sub_category.
+   -  PUT /sub_category/{id} : Updates an existing Subcategory by its ID.
+   -  DELETE /sub_category/{id} : Deletes an existing Subcategory by its ID.
+## item Management:   
+
+   -  GET /item: Retrieve a list of all items.
+   -  GET /item/{id}: Retrieve a specific item by ID.
+   -  POST /item: Create a new item.
+   -  PUT /item/{id}: Update an existing item.
+   -  DELETE /item/{id}: Delete a item.   
+
+## Cart Management:
+
+   - GET /cart/{userId}: Retrieve the cart of a specific user.
+   - POST /cart: Add an item to a user's cart. 
+   - DELETE /cart/{userId}/items/{itemId}: Remove an item from a user's cart.
+   - DELETE /cart/{userId} : Clear the user's cart
+
+## vendor profile Management :
+
+   - GET /vendor-profile : Retrieves a list of all vendor profile.
+   - GET /vendor-profile/:id : Retrieves a specific vendor profile by its ID.
+   - POST /vendor-profile : Creates a new vendor profile.
+   - PUT /vendor-profile/:id   : Updates an existing vendor profile by its ID.
+   - DELETE /vendor-profile/:id   : Deletes an existing vendor profile by its ID.
+
+## User Management:
+
+   -  GET /user/{id}: Retrieve a specific user by ID.
+   -  PUT /user/{Id}: Update an existing user.   
+ 
