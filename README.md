@@ -1,9 +1,8 @@
 # Biddi system 
 
 # Introduction
-Biddie System is a platform designed to facilitate online bidding and auctions for various products and services. 
-It provides a user-friendly interface for buyers to discover and participate in bidding events, 
-while offering vendors a platform to showcase their products or services and engage with potential customers.
+This is a foundational Nest.js application demonstrating the core principles of connecting entities to a database and interacting with APIs. 
+It focuses on the essential CRUD (Create, Read, Update, Delete) operations without delving into advanced concepts like middleware, guards, authentication, authorization, or error handling. This stripped-down approach allows for a clear understanding of the fundamental database interactions within a Nest.js context.
 
 # Database Relationships
 ## User
