@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';   
 
 import { Subcategory, SubcategoryDocument } from './subcategories.schema';
-// import { Category, CategoryDocument } from '../categories/categories.schema';
 import { CreateSubcategoryDto, UpdateSubcategoryDto } from './subcategory.dto';
 import slugify from 'slugify';
 
@@ -12,7 +11,6 @@ export class SubcategoriesService {
   constructor(
     @InjectModel(Subcategory.name) private readonly subcategoryModel: Model<SubcategoryDocument>,   
 
-    //  private readonly categoryModel: Model<CategoryDocument>
   ) {}
   async findAll(): Promise<Subcategory[]> {
     return await this.subcategoryModel.find().exec();
@@ -21,12 +19,12 @@ export class SubcategoriesService {
     return await this.subcategoryModel.findById(id).exec();
   }
   async create(createSubcategoryDto: CreateSubcategoryDto): Promise<Subcategory> {
-   // const categoryId = new Types.ObjectId(createSubcategoryDto.categoryId);
-    // // Ensure category exists
-    // const category = await this.categoryModel.findById(categoryId);
-    // if (!category) {
-    //   throw new NotFoundException('Category not found');
-    // }
+  //  const categoryId = new Types.ObjectId(createSubcategoryDto.categoryId);
+  //   // Ensure category exists
+  //   const category = await this.categoryModel.findById(categoryId);
+  //   if (!category) {
+  //     throw new NotFoundException('Category not found');
+  //   }
 
     const subcategory = new Subcategory();
     subcategory.title = createSubcategoryDto.title;
