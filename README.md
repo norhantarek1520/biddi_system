@@ -160,5 +160,7 @@ It focuses on the essential CRUD (Create, Read, Update, Delete) operations witho
 ## User Management:
 
    -  GET /user/{id}: Retrieve a specific user by ID.
-   -  PUT /user/{Id}: Update an existing user.   
+   -  PUT /user/{Id}: Update an existing user.
+   -  POST / user / login : login to the system with email and  password
+   -  POST / user / signup : create new account with email ,name and  password 
  
