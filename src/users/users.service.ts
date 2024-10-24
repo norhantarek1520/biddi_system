@@ -30,17 +30,19 @@ export class UsersService {
   async findByEmail(email: string): Promise<User | null> {
     return await this.userModel.findOne({ email }).exec();
   }
-  async signup(username: string, password: string): Promise<void> {
-    const existingUser = await this.userModel.findOne({ username });
+  async signup(name: string, password: string , email : string) : Promise<Object> {
+    const existingUser = await this.userModel.findOne({ email });
     if (existingUser) {
-      throw new Error('Username already exists');
+      throw new Error('email already exists');
     }
-    const user = new this.userModel({ username, password });
+    const user = new this.userModel({ name, password , email });
     await user.save();
+    const user_data = await this.userModel.findOne({email}) ;
+    return user_data ;
   }
-  async login(username: string): Promise<number | null> {
-    const user = await this.userModel.findOne({ where: { username } });
-    if (user) {
+  async login(email: string , password : string): Promise<number | null> {
+    const user =  await this.userModel.findOne({ email }).exec();
+    if(user.password == password) {
       return user.id;
     }
     return null;

@@ -28,7 +28,7 @@ export class User {
     zip: Number,
   }
 
-  @Prop({ default: false })
+  @Prop({ required : false })
   passwordChangedAt: Date;
 
   @Prop()
