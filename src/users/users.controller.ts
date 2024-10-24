@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import {  UpdateUserDto } from './user.dto';
+import { UpdateUserDto } from './user.dto';
 import { UsersService } from './users.service';
 
 @Controller('user')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Get(':id')
   async getProfile(@Param('id') id: string) {
@@ -13,6 +13,16 @@ export class UsersController {
   @Put(':id')
   async updateProfile(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return await this.usersService.update(id, updateUserDto);
+  }
+  @Post('signup')
+  async signup(@Body()
+  body: { username: string; password: string }): Promise<void> {
+    await this.usersService.signup(body.username, body.password);
+  }
+
+  @Post('login')
+  async login(@Body() body: { username: string }): Promise<number | null> {
+    return await this.usersService.login(body.username);
   }
 
 }

@@ -4,7 +4,7 @@ import { isValidObjectId } from 'mongoose';
 import { VendorProfileService } from './vendors-profile.service';
 import { CreateVendorProfileDto, UpdateVendorProfileDto } from './vendor-profile.dto';
 
-@Controller('vendor-profiles')
+@Controller('vendor-profile')
 export class VendorProfileController {
   constructor(private readonly vendorProfileService: VendorProfileService) {}
 
