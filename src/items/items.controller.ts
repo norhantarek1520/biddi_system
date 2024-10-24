@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common'
 import { ItemService } from './items.service';
 import { CreateItemDto } from './item.dto';
 
-@Controller('items')
+@Controller('item')
 export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
