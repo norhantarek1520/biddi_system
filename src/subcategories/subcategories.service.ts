@@ -1,16 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';   
-
 import { Subcategory, SubcategoryDocument } from './subcategories.schema';
 import { CreateSubcategoryDto, UpdateSubcategoryDto } from './subcategory.dto';
+import { CategoriesService } from '../categories/categories.service';
+
 import slugify from 'slugify';
 
 @Injectable()
 export class SubcategoriesService {
   constructor(
-    @InjectModel(Subcategory.name) private readonly subcategoryModel: Model<SubcategoryDocument>,   
-
+    @InjectModel(Subcategory.name) private subcategoryModel: Model<SubcategoryDocument>,   
+    private readonly categoriesService: CategoriesService,
   ) {}
   async findAll(): Promise<Subcategory[]> {
     return await this.subcategoryModel.find().exec();
@@ -19,13 +20,11 @@ export class SubcategoriesService {
     return await this.subcategoryModel.findById(id).exec();
   }
   async create(createSubcategoryDto: CreateSubcategoryDto): Promise<Subcategory> {
-  //  const categoryId = new Types.ObjectId(createSubcategoryDto.categoryId);
-  //   // Ensure category exists
-  //   const category = await this.categoryModel.findById(categoryId);
-  //   if (!category) {
-  //     throw new NotFoundException('Category not found');
-  //   }
-
+    // Ensure category exists
+    const category = await this.categoriesService.findOne(createSubcategoryDto.categoryId)
+    if (!category) {
+      throw new NotFoundException('Category not found');
+    }
     const subcategory = new Subcategory();
     subcategory.title = createSubcategoryDto.title;
     subcategory.description = createSubcategoryDto.description;
@@ -34,8 +33,6 @@ export class SubcategoriesService {
       subcategory.slug = slugify(createSubcategoryDto.title, { lower: true });
     }
     subcategory.categoryId = new Types.ObjectId(createSubcategoryDto.categoryId);
-
-    
     const createdSubcategory = new this.subcategoryModel(subcategory);
     return await createdSubcategory.save();
   }

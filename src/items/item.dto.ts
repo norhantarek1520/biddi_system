@@ -1,6 +1,6 @@
 import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateItemDto {
+export class ItemDto {
   @IsString()
   itemTitle: string;
 

@@ -17,7 +17,6 @@ export class Subcategory {
   @Prop()
   image_link: string;
 
-
   // Reference to the parent category ID
   @Prop({ type: Types.ObjectId, ref: 'Category', required: true })
   categoryId: Types.ObjectId;

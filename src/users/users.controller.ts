@@ -17,20 +17,27 @@ export class UsersController {
   @Post('signup')
   async signup(@Body()
   body: { name: string; password: string ; email : string  , passwordConfirm: string }): Promise<object> {
-    if(body.passwordConfirm === body.password){
-      return await this.usersService.signup(body.name, body.password , body.email);
+    try {
+      if(body.passwordConfirm === body.password){
+        return await this.usersService.signup(body.name, body.password , body.email);
+      }
+      else throw new HttpException(`passwordConfirm and password are not the same`, HttpStatus.BAD_REQUEST);
+    } catch (error) {
+      throw new HttpException(`${error}`, HttpStatus.CONFLICT); 
     }
-    else throw new Error ("passwordConfirm and password are not the same")
+  
 
   }
 
   @Post('login')
   async login(@Body() body: { email: string  , password : string}): Promise<number | null> {
-    const user = await this.usersService.login(body.email , body.password);
-    if (user != null){ return user}
-    else {
-      throw new HttpException('Invalid credentials', HttpStatus.NOT_FOUND);
+    try {
+     return await this.usersService.login(body.email , body.password);
+    } catch (error) {
+      throw new HttpException(`${error}`, HttpStatus.BAD_REQUEST); 
     }
+    
+
 
   }
 

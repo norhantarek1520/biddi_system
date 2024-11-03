@@ -41,7 +41,7 @@ export class Item {
     @Prop({ required: true, type: String })
     vendor_id: string;
     
-    @Prop({ required: true, type: Number, default: 0 })
+    @Prop({ required: false, type: Number, default: 0 })
     ratingsAverage: number;
     
     @Prop({ required: true, enum: ['product', 'service'] })
@@ -59,7 +59,7 @@ export class Item {
     @Prop({ required: false, type: String, default: null })
     brand: string;
     
-    @Prop({ required: true, type: String, default: null })
+    @Prop({ required: false, type: String, default: null })
     model: string;
     
     @Prop({ required: false, type: String, default: null })

@@ -42,10 +42,13 @@ export class UsersService {
   }
   async login(email: string , password : string): Promise<number | null> {
     const user =  await this.userModel.findOne({ email }).exec();
+    if (!user) {
+      throw new Error('email not exists');
+    }
     if(user.password == password) {
       return user.id;
     }
-    return null;
+    else throw new Error("This password is Wrong")
   }
 
 }

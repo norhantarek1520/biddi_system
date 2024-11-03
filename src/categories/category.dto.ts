@@ -8,9 +8,9 @@ export class CreateCategoryDto {
   description: string;
 
   @ApiProperty()
-  image_link: string;
+  image_link?: string;
 
-  slug : string ;
+  slug? : string ;
 }
 
 export class UpdateCategoryDto {
@@ -21,7 +21,7 @@ export class UpdateCategoryDto {
   description: string;
 
   @ApiProperty()
-  image_link: string;
+  image_link ?: string;
 
-  slug : string ;
+  slug?: string ;
 }

@@ -27,10 +27,11 @@ export class SubcategoriesController {
 
   @Post()
   async create(@Body() createSubcategoryDto: CreateSubcategoryDto) {
-    const createSubcategory = await this.subcategoriesService.create(createSubcategoryDto);
-    if (createSubcategory == null) {
-      throw new NotFoundException('Faild to Create the subcategory ');
+   
+    if (!isValidObjectId(createSubcategoryDto.categoryId)) {
+      throw new BadRequestException('Invalid Category  ID');
     }
+    const createSubcategory = await this.subcategoriesService.create(createSubcategoryDto);
     return createSubcategory;
   }
 
@@ -38,6 +39,9 @@ export class SubcategoriesController {
   async update(@Param('id') id: string, @Body() updateSubcategoryDto: UpdateSubcategoryDto) {
     if (!isValidObjectId(id)) {
       throw new BadRequestException('Invalid subcategory  ID');
+    }
+    if (!isValidObjectId(updateSubcategoryDto.categoryId)) {
+      throw new BadRequestException('Invalid Category  ID');
     }
     const updatedSubcategory = await this.subcategoriesService.update(id, updateSubcategoryDto);
     if (!updatedSubcategory) {

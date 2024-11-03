@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { BadRequestException, NotFoundException , HttpCode} from '@nestjs/common';
+import { BadRequestException, NotFoundException , HttpCode , InternalServerErrorException} from '@nestjs/common';
 import { isValidObjectId } from 'mongoose';
 import { CreateCategoryDto, UpdateCategoryDto } from './category.dto';
 import { CategoriesService } from './categories.service';
@@ -38,14 +38,18 @@ export class CategoriesController {
   async update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     if (!isValidObjectId(id)) {
       throw new BadRequestException('Invalid category ID');
+    } 
+    try {
+      const updatedCategory = await this.categoriesService.update(id, updateCategoryDto);
+      if (!updatedCategory) {
+        throw new NotFoundException('Category  not found');
+      }
+      return updatedCategory;
+    } catch (error) {
+      console.error('Error updating category:', error);
+        throw new InternalServerErrorException('Failed to update category');
     }
-    const updatedCategory = await this.categoriesService.update(id, updateCategoryDto);
-    if (!updatedCategory) {
-      throw new NotFoundException('Category  not found');
-    }
-    return updatedCategory;
   }
-
   @Delete(':id')
   @HttpCode(204)
   async remove(@Param('id') id: string) {
